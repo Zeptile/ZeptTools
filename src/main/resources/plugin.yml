@@ -1,0 +1,17 @@
+name: ZeptTools
+version: ${project.version}
+main: com.zeptile.zepttools.zepttools.ZeptTools
+api-version: 1.16
+prefix: ZeptTools
+authors: [Zeptile]
+description: Core features for ZeptServers
+website: https://zeptile.com
+commands:
+  zadmin:
+    description: Admin Command for Zeptile servers
+    usage: /zadmin
+    permission: zepttools.zadmin
+  zbackup:
+    description: Backup Command for Zeptile servers
+    usage: /zbackup
+    permission: zepttools.zbackup
