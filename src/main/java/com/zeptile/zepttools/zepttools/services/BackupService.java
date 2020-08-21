@@ -74,6 +74,11 @@ public class BackupService {
                     try {
                         File tempDir = new File(backupFolder + File.separator + "temp" + File.separator);
 
+                        // Clean up Existing temp file if exists.
+                        if (tempDir.exists()) {
+                            FileUtil.recursiveDelete(tempDir);
+                        }
+
                         boolean tempCreated = tempDir.mkdirs();
                         if (!tempCreated)
                             throw new Exception("Failed to create Temp Directory!");

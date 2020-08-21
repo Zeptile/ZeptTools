@@ -9,9 +9,9 @@ website: https://zeptile.com
 commands:
   zadmin:
     description: Admin Command for Zeptile servers
-    usage: /zadmin
+    usage: /zadmin <action = [stop]> <args[]>
     permission: zepttools.zadmin
   zbackup:
     description: Backup Command for Zeptile servers
-    usage: /zbackup
+    usage: /zbackup <action = [run, last]> <args[]>
     permission: zepttools.zbackup
