@@ -37,7 +37,7 @@ public class BackupService {
             @Override
             public void run() {
                 long lastSaveMilli = _plugin.getConfig().getLong("lastSave");
-                long delayMilli = _plugin.getConfig().getInt("timerInterval") * 60 * 60 * 1000; // hour to ms
+                long delayMilli = _plugin.getConfig().getInt("backupInterval") * 1000; // min to ms
                 if (System.currentTimeMillis() - lastSaveMilli >= delayMilli) {
                     save();
                 }
@@ -102,10 +102,16 @@ public class BackupService {
 
                         String size = FileUtil.humanReadableByteCountBin(zippedFile.length());
                         _comms.broadcast("Backup Completed!");
-                        _comms.broadcast(String.format("Successfully Compressed %s - <%s>", zipFileName, size));
+                        _comms.info(String.format("Successfully Compressed %s - <%s>", zipFileName, size));
                     } catch (Exception e) {
                         _comms.error("Could not zip file.");
                         e.printStackTrace();
+                    } finally {
+                        // Make sure worlds auto-save is set back to TRUE after pass
+                        for (World w : worlds) {
+                            if (w.isAutoSave())
+                                w.setAutoSave(true);
+                        }
                     }
                 }
             }.runTaskAsynchronously(_plugin);
@@ -114,12 +120,6 @@ public class BackupService {
             _comms.error("FATAL ERROR in BackupService::Save() => " + e.toString());
             _comms.broadcast(ChatColor.RED + "Fatal error occurred while trying to backup worlds.");
             e.printStackTrace();
-        } finally {
-            // Make sure worlds auto-save is set back to TRUE after pass
-            for (World w : worlds) {
-                if (w.isAutoSave())
-                    w.setAutoSave(true);
-            }
         }
     }
 
