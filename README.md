@@ -6,15 +6,21 @@ Runs a backup engine on a timer that will trigger at the interval specified in t
 Currently only has two commands
 ```
 /zadmin <action = [stop]> <args[]>
-/zbackup <action = [backup]> <args[]>
+/zbackup <action = [run, last]> <args[]>
 ```
 ## Config ##
 Currently only has two commands
 ```yaml
-timerInterval: 8 # Time in hour to wait between Backup Passes
 maxSaveFiles: 10 # Maximum amount of backup files stored. (default = 10)
 
-lastSave: 1597167317730 # Keeps last updated time value on disk for reliability, DO NOT TOUCH
+monitorInterval: 30 # Time in seconds to wait between Monitor Passes
+backupInterval: 28800 # Time in seconds to wait between Backup Passes
+
+chatMonitorHookUrl:  '<WebhookURL here>' # Webhook for chat monitor
+tpsMonitorHookUrl :  '<WebhookURL here>' # Webhook for tps monitor
+cpuMonitorHookUrl :  '<WebhookURL here>' # Webhook cpu chat monitor
+
+lastSave: 1599100490815 # Keeps last updated time value on disk for reliability, DO NOT TOUCH
 ```
 ## Contributing ##
 This is mostly a personal project to manage my own Minecraft servers. <br>
