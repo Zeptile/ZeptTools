@@ -23,7 +23,7 @@ public class ZipUtil {
                             Files.copy(path, zs);
                             zs.closeEntry();
                         } catch (IOException e) {
-                            e.printStackTrace();
+                            e.toString();
                         }
                     });
         }

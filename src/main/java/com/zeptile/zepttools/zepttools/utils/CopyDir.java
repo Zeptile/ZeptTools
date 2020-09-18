@@ -27,7 +27,7 @@ public class CopyDir extends SimpleFileVisitor<Path> {
             Path targetFile = targetDir.resolve(sourceDir.relativize(file));
             Files.copy(file, targetFile);
         } catch (IOException ex) {
-            ex.printStackTrace();
+            ex.toString();
         }
 
         return FileVisitResult.CONTINUE;
@@ -40,7 +40,7 @@ public class CopyDir extends SimpleFileVisitor<Path> {
             Path newDir = targetDir.resolve(sourceDir.relativize(dir));
             Files.createDirectory(newDir);
         } catch (IOException ex) {
-            ex.printStackTrace();
+            ex.toString();
         }
 
         return FileVisitResult.CONTINUE;
