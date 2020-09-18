@@ -11,7 +11,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.util.Objects;
 import java.util.logging.Logger;
 
-public class ZeptTools extends JavaPlugin {
+public final class ZeptTools extends JavaPlugin {
 
     private final Logger _logger;
     private FileConfiguration _config;

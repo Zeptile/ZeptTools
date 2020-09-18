@@ -33,10 +33,10 @@ public class MonitorService {
         try {
             DiscordWebhook webhook = new DiscordWebhook(_plugin.getConfig().getString("tpsMonitorHookUrl"));
             if (Float.parseFloat(_monitorUtil.getTPS(0)) <= 15) {
-                _comms.warn(String.format("TPS DROPPED BELOW 15 - Minute Ago: %s \n 5 Minute Ago: %s \n 15 Minute Ago: %s", _monitorUtil.getTPS(0), _monitorUtil.getTPS(1), _monitorUtil.getTPS(2)));
+                _comms.warn(String.format("TPS DROPPED BELOW 15 \u200B  1 Minute Ago: %s \u200B 5 Minute Ago: %s \u200B 15 Minute Ago: %s", _monitorUtil.getTPS(0), _monitorUtil.getTPS(1), _monitorUtil.getTPS(2)));
                 webhook.addEmbed(new DiscordWebhook.EmbedObject()
                         .setAuthor("TPS MONITOR ALERT - TPS DROPPED BELOW 15", "", "")
-                        .setDescription(String.format("@here 1 Minute Ago: %s \n 5 Minute Ago: %s \n 15 Minute Ago: %s", _monitorUtil.getTPS(0), _monitorUtil.getTPS(1), _monitorUtil.getTPS(2)))
+                        .setDescription(String.format("@here \u200B 1 Minute Ago: %s \u200B 5 Minute Ago: %s \u200B 15 Minute Ago: %s", _monitorUtil.getTPS(0), _monitorUtil.getTPS(1), _monitorUtil.getTPS(2)))
                         .setColor(Color.RED)
                 );
                 webhook.execute();

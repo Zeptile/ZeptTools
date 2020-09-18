@@ -37,12 +37,12 @@ public class BackupService {
             @Override
             public void run() {
                 long lastSaveMilli = _plugin.getConfig().getLong("lastSave");
-                long delayMilli = _plugin.getConfig().getInt("backupInterval") * 1000; // min to ms
+                long delayMilli = _plugin.getConfig().getInt("backupInterval") * 1000; // sec to ms
                 if (System.currentTimeMillis() - lastSaveMilli >= delayMilli) {
                     save();
                 }
             }
-        }.runTaskTimerAsynchronously(_plugin, 20, 20 * 60);
+        }.runTaskTimerAsynchronously(_plugin, 20 * 60, 20 * 60);
     }
 
     public void save() {
@@ -74,10 +74,9 @@ public class BackupService {
                     try {
                         File tempDir = new File(backupFolder + File.separator + "temp" + File.separator);
 
-                        // Clean up Existing temp file if exists.
-                        if (tempDir.exists()) {
+                        // remove leftover temp dir if exists
+                        if (tempDir.exists())
                             FileUtil.recursiveDelete(tempDir);
-                        }
 
                         boolean tempCreated = tempDir.mkdirs();
                         if (!tempCreated)
@@ -109,7 +108,7 @@ public class BackupService {
                     } finally {
                         // Make sure worlds auto-save is set back to TRUE after pass
                         for (World w : worlds) {
-                            if (w.isAutoSave())
+                            if (!w.isAutoSave())
                                 w.setAutoSave(true);
                         }
                     }
